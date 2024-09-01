@@ -5,8 +5,13 @@ import { Transaction, TransactionSchema } from './schemas/transaction.schema';
 
 @Module({
     imports: [MongooseModule.forFeature([
-        {name: Transaction.name, schema: TransactionSchema}
+        { name: Transaction.name, schema: TransactionSchema }
     ])],
-    providers: [TransactionsService]
+    providers: [TransactionsService],
+    exports: [TransactionsService,
+        MongooseModule.forFeature([
+            { name: Transaction.name, schema: TransactionSchema }
+        ])
+    ]
 })
-export class TransactionsModule {}
+export class TransactionsModule { }
